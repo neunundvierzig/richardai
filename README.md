@@ -12,4 +12,4 @@ Written in C# and JS, we are aprreciating your pull request when it is done acco
 to all rules.
 
 ### Short demonstration
-[media-19531d2c5f311776c67e44b76083db13309004956-1.png](https://postimg.cc/xcpwZzZn)
+![Demo](demo/final_demonstration.gif)

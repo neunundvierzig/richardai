@@ -1,37 +1,76 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:RichardAI.ViewModels"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="50"
-        x:Class="RichardAI.Views.MainWindow"
-        x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="RichardAI"
-        Width="300"
-        Height="500"
-        Topmost="True"
-        ShowInTaskbar="False"
-        ExtendClientAreaToDecorationsHint="True"
-        ExtendClientAreaTitleBarHeightHint="-1"
+        x:Class="RichardAI.MainWindow"
+        Title="Richards-AI"
+        Height="60" 
+        Width="350"
+        MinWidth="350"
         SystemDecorations="None"
-        CornerRadius="20">
+        CanResize="False"
+        TransparencyLevelHint="Transparent"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen">
 
-    <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
-    
-    <Border CornerRadius="100"
-            Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
-            Margin="10">
-            
-        <!-- Ваш контент здесь -->
-        <StackPanel Margin="20">
-            <TextBlock Text="Поиск" FontSize="18"/>
-            <TextBox Watermark="Введите запрос..."/>
-        </StackPanel>
+    <Border CornerRadius="25" 
+            Background="#FFFFFF" 
+            Margin="5"
+            BoxShadow="0 2 5 0 #00000020">
         
+        <Grid PointerPressed="WindowDragMove">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!--Поле ввода-->
+            <TextBox x:Name="InputTextBox" 
+                    Grid.Column="0" 
+                    Height="30"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Stretch"
+                    BorderThickness="0"
+                    Background="Transparent"
+                    Foreground="#333333"
+                    CaretBrush="#333333"
+                    Margin="20,3,10,0"
+                    FontSize="14"
+                    Watermark="Input your prompt...">
+                <TextBox.Styles>
+                    <Style Selector="TextBox /template/ Border#PART_BorderElement">
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                    <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+                        <Setter Property="BoxShadow" Value="none"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                </TextBox.Styles>
+            </TextBox>
+            
+            <!--Кнопка-->
+            <Border Grid.Column="1"
+                    Width="40"
+                    Height="40"
+                    Margin="0,0,10,0"
+                    CornerRadius="20"
+                    Background="Transparent"
+                    PointerPressed="SubmitButton_Click"
+                    Cursor="Hand">
+                <TextBlock Text="→" 
+                           Foreground="#333333"
+                           FontWeight="Bold"
+                           FontSize="16"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+                
+                <Border.Styles>
+                    <Style Selector="Border:pointerover">
+                        <Setter Property="Background" Value="#F0F0F0"/>
+                    </Style>
+                    <Style Selector="Border:pressed">
+                        <Setter Property="Background" Value="#E0E0E0"/>
+                    </Style>
+                </Border.Styles>
+            </Border>
+        </Grid>
     </Border>
 </Window>

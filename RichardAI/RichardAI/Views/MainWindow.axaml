@@ -1,76 +1,43 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="RichardAI.MainWindow"
-        Title="Richards-AI"
-        Height="60" 
-        Width="350"
-        MinWidth="350"
+        Title="RichardsAI"
+        Height="33"
+        Width="33"
         SystemDecorations="None"
-        CanResize="False"
-        TransparencyLevelHint="Transparent"
         Background="Transparent"
-        WindowStartupLocation="CenterScreen">
-
-    <Border CornerRadius="25" 
-            Background="#FFFFFF" 
-            Margin="5"
-            BoxShadow="0 2 5 0 #00000020">
+        TransparencyLevelHint="Transparent"
+        WindowStartupLocation="Manual"
+        Position="550, 500"
+        Topmost="True"
+        CanResize="False"
+        ShowInTaskbar="False"
+        Opacity="0.7"
+        Cursor="Hand">
+    
+    <Grid ClipToBounds="True"
+          Width="31"
+          Height="31"
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center">
         
-        <Grid PointerPressed="WindowDragMove">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-
-            <!--Поле ввода-->
-            <TextBox x:Name="InputTextBox" 
-                    Grid.Column="0" 
-                    Height="30"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Stretch"
-                    BorderThickness="0"
-                    Background="Transparent"
-                    Foreground="#333333"
-                    CaretBrush="#333333"
-                    Margin="20,3,10,0"
-                    FontSize="14"
-                    Watermark="Input your prompt...">
-                <TextBox.Styles>
-                    <Style Selector="TextBox /template/ Border#PART_BorderElement">
-                        <Setter Property="BorderThickness" Value="0"/>
-                    </Style>
-                    <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
-                        <Setter Property="BoxShadow" Value="none"/>
-                        <Setter Property="BorderThickness" Value="0"/>
-                    </Style>
-                </TextBox.Styles>
-            </TextBox>
+        <!-- Круглый фон с обрезкой -->
+        <Border Width="27"
+                Height="27"
+                CornerRadius="5"
+                Background="White"
+                BoxShadow="0 0 5 0 #00000030">
             
-            <!--Кнопка-->
-            <Border Grid.Column="1"
-                    Width="40"
-                    Height="40"
-                    Margin="0,0,10,0"
-                    CornerRadius="20"
-                    Background="Transparent"
-                    PointerPressed="SubmitButton_Click"
-                    Cursor="Hand">
-                <TextBlock Text="→" 
-                           Foreground="#333333"
-                           FontWeight="Bold"
-                           FontSize="16"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"/>
-                
-                <Border.Styles>
-                    <Style Selector="Border:pointerover">
-                        <Setter Property="Background" Value="#F0F0F0"/>
-                    </Style>
-                    <Style Selector="Border:pressed">
-                        <Setter Property="Background" Value="#E0E0E0"/>
-                    </Style>
-                </Border.Styles>
+            <!-- Изображение с дополнительной обрезкой -->
+            <Border ClipToBounds="True"
+                    CornerRadius="4"
+                    Background="White">
+                <Image Source="avares://RichardAI/Assets/Richard_Ai_Logo_png.png"
+                       Width="23"
+                       Height="23"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
             </Border>
-        </Grid>
-    </Border>
+        </Border>
+    </Grid>
 </Window>

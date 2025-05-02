@@ -1,42 +1,27 @@
+using System;
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Data.Core;
-using Avalonia.Data.Core.Plugins;
-using System.Linq;
 using Avalonia.Markup.Xaml;
-using RichardAI.ViewModels;
+using Avalonia.Threading;
+using System.Runtime.InteropServices;
+using Avalonia.Input;
 
-namespace RichardAI;
-
-public partial class App : Application
+namespace RichardAI
 {
-    public override void Initialize()
+    public class App : Application
     {
-        AvaloniaXamlLoader.Load(this);
-    }
-
-    public override void OnFrameworkInitializationCompleted()
-    {
-        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-        {
-            DisableAvaloniaDataAnnotationValidation();
-            desktop.MainWindow = new MainWindow
-            {
-                DataContext = new MainWindowViewModel(),
-            };
-        }
-
-        base.OnFrameworkInitializationCompleted();
-    }
-
-    private void DisableAvaloniaDataAnnotationValidation()
-    {
-        var dataValidationPluginsToRemove =
-            BindingPlugins.DataValidators.OfType<DataAnnotationsValidationPlugin>().ToArray();
+        private IDisposable _hotKeyRegistration;
         
-        foreach (var plugin in dataValidationPluginsToRemove)
+        public override void OnFrameworkInitializationCompleted()
         {
-            BindingPlugins.DataValidators.Remove(plugin);
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                //RegisterGlobalHotkey();
+
+                desktop.MainWindow = new MainWindow();
+            }
+            base.OnFrameworkInitializationCompleted();
         }
     }
 }

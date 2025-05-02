@@ -1,0 +1,98 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="RichardAI.ChatWindow"
+        Title="Richards-AI"
+        Height="60" 
+        Width="350"
+        MinWidth="350"
+        SystemDecorations="None"
+        CanResize="False"
+        ShowInTaskbar="False"
+        TransparencyLevelHint="Transparent"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen"
+        KeyDown="Window_KeyDown">
+
+    <Border CornerRadius="25" 
+            Background="#FFFFFF" 
+            Margin="5"
+            BoxShadow="0 2 5 0 #00000020"
+            BorderThickness="0.4"
+            BorderBrush="#333333">
+        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Поле ввода с полным удалением обводок -->
+            <TextBox x:Name="InputTextBox" 
+                    Grid.Column="0" 
+                    Height="30"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Stretch"
+                    Background="Transparent"
+                    Foreground="#333333"
+                    CaretBrush="#333333"
+                    Margin="20,15,10,0"
+                    FontSize="14"
+                    Watermark="Input your prompt...">
+                <TextBox.Styles>
+                    <!-- Базовый стиль -->
+                    <Style Selector="TextBox">
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Padding" Value="0"/>
+                    </Style>
+                    
+                    <!-- Стиль для внутреннего Border -->
+                    <Style Selector="TextBox /template/ Border#PART_BorderElement">
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BoxShadow" Value="none"/>
+                        <Setter Property="CornerRadius" Value="0"/>
+                    </Style>
+                    
+                    <!-- Стиль при фокусе -->
+                    <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="BoxShadow" Value="none"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                    </Style>
+                    
+                    <!-- Стиль при наведении -->
+                    <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                    </Style>
+                </TextBox.Styles>
+            </TextBox>
+            
+            <!-- Кнопка -->
+            <Border Grid.Column="1"
+                    Width="40"
+                    Height="40"
+                    Margin="0,0,10,0"
+                    CornerRadius="20"
+                    Background="Transparent"
+                    PointerPressed="SubmitButton_Click"
+                    Cursor="Hand">
+                <TextBlock Text="→" 
+                          Foreground="#333333"
+                          FontWeight="Bold"
+                          FontSize="16"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"/>
+                
+                <Border.Styles>
+                    <Style Selector="Border:pointerover">
+                        <Setter Property="Background" Value="#F0F0F0"/>
+                    </Style>
+                    <Style Selector="Border:pressed">
+                        <Setter Property="Background" Value="#E0E0E0"/>
+                    </Style>
+                </Border.Styles>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

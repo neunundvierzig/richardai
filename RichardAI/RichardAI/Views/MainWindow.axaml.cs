@@ -1,10 +1,8 @@
-using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
-using Avalonia.VisualTree;
+using System;
 
 namespace RichardAI
 {
@@ -13,32 +11,35 @@ namespace RichardAI
         public MainWindow()
         {
             InitializeComponent();
-        }
-        private void MinimizeWindow(object sender, RoutedEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
+            PointerEntered += MainWindow_PointerEntered;
+            PointerExited += MainWindow_PointerExited;
+            PointerPressed += MainWindow_PointerPressed;
+
+            Deactivated += (s, e) => Close();
         }
 
-        private void CloseWindow(object sender, RoutedEventArgs e)
+        private void MainWindow_PointerEntered(object sender, PointerEventArgs e)
         {
+            this.Opacity = 1;
+        }
+
+        private void MainWindow_PointerExited(object sender, PointerEventArgs e)
+        {
+            this.Opacity = 0.7;
+        }
+
+        private void MainWindow_PointerPressed(object sender, PointerPressedEventArgs e)
+        {
+            new ChatWindow().Show();
             Close();
         }
-        
-        private void WindowDragMove(object? sender, PointerPressedEventArgs e)
-        {
-            if (sender is Control control && control.GetVisualRoot() is Window window)
-            {
-                window.BeginMoveDrag(e);
-            }
-        }
 
-        private void SubmitButton_Click(object? sender, RoutedEventArgs e)
+        protected override void OnClosed(EventArgs e)
         {
-            // Обработка нажатия кнопки
-            if (!string.IsNullOrWhiteSpace(InputTextBox.Text))
-            {
-                Console.WriteLine("Input: " + InputTextBox.Text);
-            }
+            this.PointerEntered -= MainWindow_PointerEntered;
+            this.PointerExited -= MainWindow_PointerExited;
+            this.PointerPressed -= MainWindow_PointerPressed;
+            base.OnClosed(e);
         }
     }
 }

@@ -11,6 +11,11 @@
     <ItemGroup>
         <Folder Include="Models\" />
         <AvaloniaResource Include="Assets\**" />
+        <Folder Include="Source\Core\Network\" />
+        <Folder Include="Source\Modules\" />
+        <Folder Include="Source\Config\" />
+        <Folder Include="Source\Utils\" />
+        <Folder Include="Source\Services\" />
     </ItemGroup>
 
     <ItemGroup>
